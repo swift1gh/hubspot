@@ -1,19 +1,17 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Layout from './components/layout/Layout';
-import HomePage from './pages/HomePage';
-import ProductsPage from './pages/ProductsPage';
-import SolutionsPage from './pages/SolutionsPage';
-import ResourcesPage from './pages/ResourcesPage';
-import PricingPage from './pages/PricingPage';
-import AboutPage from './pages/AboutPage';
-import ContactPage from './pages/ContactPage';
-import BlogPage from './pages/BlogPage';
-import AcademyPage from './pages/AcademyPage';
-import MarketplacePage from './pages/MarketplacePage';
-import DemoPage from './pages/DemoPage';
-import GetStartedPage from './pages/GetStartedPage';
-import NotFoundPage from './pages/NotFoundPage';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Layout from "./components/layout/Layout";
+import HomePage from "./pages/HomePage";
+import NotFoundPage from "./pages/NotFoundPage";
+
+const RedirectComponent = ({ to, isFullUrl = false }) => {
+  React.useEffect(() => {
+    window.location.href = isFullUrl ? to : `https://www.hubspot.com${to}`;
+  }, [to, isFullUrl]);
+  return (
+    <div className="mb-60 flex justify-center text-center">Redirecting...</div>
+  );
+};
 
 const App = () => {
   return (
@@ -21,17 +19,54 @@ const App = () => {
       <Layout>
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/products/*" element={<ProductsPage />} />
-          <Route path="/solutions/*" element={<SolutionsPage />} />
-          <Route path="/resources/*" element={<ResourcesPage />} />
-          <Route path="/pricing" element={<PricingPage />} />
-          <Route path="/about/*" element={<AboutPage />} />
-          <Route path="/contact/*" element={<ContactPage />} />
-          <Route path="/blog/*" element={<BlogPage />} />
-          <Route path="/academy/*" element={<AcademyPage />} />
-          <Route path="/marketplace/*" element={<MarketplacePage />} />
-          <Route path="/demo" element={<DemoPage />} />
-          <Route path="/get-started" element={<GetStartedPage />} />
+          <Route
+            path="/products/*"
+            element={<RedirectComponent to="/products" />}
+          />
+          <Route
+            path="/solutions/*"
+            element={<RedirectComponent to="/solutions" />}
+          />
+          <Route
+            path="/resources/*"
+            element={<RedirectComponent to="/resource-center" />}
+          />
+          <Route
+            path="/pricing/*"
+            element={<RedirectComponent to="/pricing/marketing" />}
+          />
+          <Route
+            path="/about/*"
+            element={<RedirectComponent to="/about-us" />}
+          />
+          <Route
+            path="/contact/*"
+            element={<RedirectComponent to="/contact-sales" />}
+          />
+          <Route path="/blog/*" element={<RedirectComponent to="/blog" />} />
+          <Route
+            path="/academy/*"
+            element={<RedirectComponent to="/academy" />}
+          />
+          <Route
+            path="/marketplace/*"
+            element={
+              <RedirectComponent to="/ecosystem/solutions-marketplace" />
+            }
+          />
+          <Route
+            path="/demo"
+            element={<RedirectComponent to="/products/demo" />}
+          />
+          <Route
+            path="/get-started"
+            element={
+              <RedirectComponent
+                to="https://app.hubspot.com/signup-hubspot/crm?hubs_signup-url=www.hubspot.com&hubs_signup-cta=homepage-hero2-cta"
+                isFullUrl={true}
+              />
+            }
+          />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Layout>

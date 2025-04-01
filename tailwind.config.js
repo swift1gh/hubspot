@@ -4,10 +4,10 @@ export default {
   theme: {
     extend: {
       colors: {
-        'hubspot-orange': '#ff7a59',
-        'hubspot-dark': '#2e475d',
+        "hubspot-orange": "#0606ce",
+        "hubspot-dark": "#2e475d",
       },
     },
   },
   plugins: [],
-}
+};
